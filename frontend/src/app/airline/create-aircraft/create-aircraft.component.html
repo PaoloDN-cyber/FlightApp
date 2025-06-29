@@ -1,0 +1,53 @@
+<div class="p-4 max-w-md mx-auto">
+  <h2 class="text-xl font-semibold mb-4">Crea un nuovo aereo</h2>
+
+  <div class="my-4">
+    <a routerLink="/airline/dashboard" class="btn btn-secondary">Torna alla Dashboard</a>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #aircraftForm="ngForm">
+
+    <!-- Modello aeromobile -->
+    <div style="margin-bottom:0.75rem;">
+      <label for="model">Modello:</label><br/>
+      <select
+        id="model"
+        name="model"
+        [(ngModel)]="model"
+        required
+        style="width:100%; padding:0.5rem;"
+      >
+        <option value="" disabled selected>Seleziona…</option>
+        <option *ngFor="let a of aircrafts" [value]="a.code">
+          {{ a.model | titlecase }} ({{ a.code.toUpperCase() }})
+        </option>
+      </select>
+    </div>
+
+    <!-- Numero posti -->
+    <div style="margin-bottom:0.75rem;">
+      <label for="seats">Numero posti:</label><br/>
+      <select
+        id="seats"
+        name="seats"
+        [(ngModel)]="seats"
+        required
+        style="width:100%; padding:0.5rem;"
+      >
+        <option value="" disabled selected>Seleziona…</option>
+        <option *ngFor="let a of aircrafts" [ngValue]="a.seats">
+          {{ a.seats }}
+        </option>
+      </select>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="aircraftForm.invalid"
+      style="padding:0.6rem 1.2rem; background:#1570ef; color:#fff; border:none; border-radius:4px;"
+    >
+      Crea Aereo
+    </button>
+
+  </form>
+</div>

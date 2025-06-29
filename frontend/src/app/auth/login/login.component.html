@@ -1,0 +1,47 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        email
+        #emailInput="ngModel"
+        placeholder="Inserisci la tua email"
+        class="form-control"
+      />
+      <div *ngIf="emailInput.invalid && emailInput.touched" class="error">
+        <small *ngIf="emailInput.errors?.['required']">Email obbligatoria.</small>
+        <small *ngIf="emailInput.errors?.['email']">Email non valida.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+        minlength="6"
+        #passwordInput="ngModel"
+        placeholder="Inserisci la password"
+        class="form-control"
+      />
+      <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error">
+        <small *ngIf="passwordInput.errors?.['required']">Password obbligatoria.</small>
+        <small *ngIf="passwordInput.errors?.['minlength']">Minimo 6 caratteri.</small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">
+      Accedi
+    </button>
+  </form>
+</div>

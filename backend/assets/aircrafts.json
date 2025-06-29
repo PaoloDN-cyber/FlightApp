@@ -1,0 +1,8 @@
+[
+  { "code": "A320",  "model": "Airbus A320-200",           "seats": 150 },
+  { "code": "A330",  "model": "Airbus A330-300",           "seats": 250 },
+  { "code": "B737",  "model": "Boeing 737-800",            "seats": 180 },
+  { "code": "B787",  "model": "Boeing 787-8 Dreamliner",   "seats": 240 },
+  { "code": "E190",  "model": "Embraer 190",               "seats": 100 },
+  { "code": "ATR72", "model": "ATR 72-600",                "seats": 70  }
+]

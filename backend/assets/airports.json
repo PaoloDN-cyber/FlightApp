@@ -1,0 +1,14 @@
+[
+  { "code": "rom", "city": "Roma" },
+  { "code": "mil", "city": "Milano" },
+  { "code": "nap", "city": "Napoli" },
+  { "code": "vce", "city": "Venezia" },
+  { "code": "par", "city": "Parigi" },
+  { "code": "tor", "city": "Torino" },
+  { "code": "fra", "city": "Francoforte" },
+  { "code": "bos", "city": "Boston" },
+  { "code": "lhr", "city": "Londra" },
+  { "code": "vie", "city": "Vienna" },
+  { "code": "pal", "city": "Palermo" },
+  { "code": "bol", "city": "Bologna" }
+]

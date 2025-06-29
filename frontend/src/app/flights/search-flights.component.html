@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <h2>Ricerca voli</h2>
+
+  <input type="date" [(ngModel)]="date" class="form-control mb-2" />
+
+  <input list="airport-list" placeholder="Da" [(ngModel)]="from" class="form-control mb-2" />
+  <input list="airport-list" placeholder="A" [(ngModel)]="to" class="form-control mb-2" />
+
+  <datalist id="airport-list">
+    <option *ngFor="let a of airports" [value]="a.code">{{ a.city }}</option>
+  </datalist>
+
+  <label>Ordina per:</label>
+  <select [(ngModel)]="sortBy" class="form-select mb-2">
+    <option value="price">Prezzo</option>
+    <option value="duration">Durata</option>
+    <option value="stops">Scali</option>
+  </select>
+
+  <button class="btn btn-primary mb-3" (click)="search()" [disabled]="loading">
+    Cerca
+  </button>
+
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div *ngFor="let it of results; let i = index" class="card mb-3">
+    <div class="card-body">
+      <p><strong>{{ it.fromToLabel }}</strong></p>
+
+      <div *ngFor="let f of it.flights; let j = index" class="mb-2">
+        <label>Classe per volo {{ f.route.from }} → {{ f.route.to }}:</label>
+        <select [(ngModel)]="classTypes[i][j]" class="form-select">
+          <option value="economy">Economy</option>
+          <option value="business">Business</option>
+          <option value="first">First</option>
+        </select>
+      </div>
+
+      <button class="btn btn-success" (click)="goToBooking(it, i)">Prenota</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<h2>Registrazione Passeggero</h2>
+<form (ngSubmit)="register()" #regForm="ngForm">
+  <input [(ngModel)]="name" name="name" placeholder="Nome" required />
+  <input [(ngModel)]="email" name="email" placeholder="Email" type="email" required />
+  <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required minlength="6" />
+  <button type="submit" [disabled]="regForm.invalid">Registrati</button>
+</form>

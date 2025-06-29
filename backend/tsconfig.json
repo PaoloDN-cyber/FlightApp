@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "nodenext",
+    "sourceMap": true,
+    "moduleResolution": "nodenext",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,  
+    "rootDir": ".",  
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": ["node"]
+  },
+  "include": [
+      "index.ts",
+      "**/*.ts",   
+     "socket.js" 
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

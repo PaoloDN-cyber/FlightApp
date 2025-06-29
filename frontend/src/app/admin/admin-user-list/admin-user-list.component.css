@@ -1,0 +1,83 @@
+/* ───────────────────────────────────────────────────────
+   Layout e tipografia (tuo codice)
+──────────────────────────────────────────────────────── */
+.admin-user-list {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.admin-user-list h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label { font-weight: bold; margin-right: 10px; }
+select { padding: 5px 10px; margin-bottom: 20px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead { background-color: #f4f4f4; }
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+a { color: #007BFF; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.action-buttons { display: flex; gap: 8px; }
+
+/* ───────────────────────────────────────────────────────
+   Pulsanti: base + hover comune
+──────────────────────────────────────────────────────── */
+button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: opacity .2s;             /* leggero fade all’hover */
+}
+
+button:not([disabled]):hover { opacity: .85; }
+
+button[disabled] {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+button.approve   { background-color:#28a745; color:#fff; } /* verde   */
+button.reject    { background-color:#dc3545; color:#fff; } /* rosso   */
+button.reminder  { background-color:#17a2b8; color:#fff; } /* blu     */
+
+button.definitive { background:#ffc107; color:#212529; }   /* giallo  */
+button.rejected   { background:#f8d7da; color:#721c24; }   /* rosa    */
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: .25; }
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination-controls button { padding: 5px 10px; }
+
+.link-dashboard {
+  margin-top: 30px;
+  text-align: center;
+}

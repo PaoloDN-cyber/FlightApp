@@ -1,0 +1,80 @@
+<div class="container" style="max-width:600px; margin:2rem auto; padding:1rem;">
+  <h2 style="margin-bottom:1rem;">Crea un nuovo volo</h2>
+  <div class="my-4">
+    <a routerLink="/airline/dashboard" class="btn btn-secondary">Torna alla Dashboard</a>
+  </div>
+
+  <form (ngSubmit)="createFlight()" #flightForm="ngForm">
+    <!-- Rotta -->
+    <div style="margin-bottom:0.75rem;">
+      <label for="route">Rotta:</label><br/>
+      <select id="route" name="routeId" [(ngModel)]="routeId" required style="width:100%; padding:0.5rem;">
+        <option value="" disabled selected>Seleziona…</option>
+        <option *ngFor="let r of routes" [ngValue]="r._id">
+          {{ r.from | titlecase }} → {{ r.to | titlecase }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Partenza -->
+    <div style="margin-bottom:0.75rem;">
+      <label for="departure">Data e ora di partenza:</label><br/>
+      <input id="departure" type="datetime-local" name="departureTime" [(ngModel)]="departureTime" required style="width:100%; padding:0.5rem;"/>
+    </div>
+
+    <!-- Arrivo -->
+    <div style="margin-bottom:0.75rem;">
+      <label for="arrival">Data e ora di arrivo:</label><br/>
+      <input id="arrival" type="datetime-local" name="arrivalTime" [(ngModel)]="arrivalTime" required style="width:100%; padding:0.5rem;"/>
+    </div>
+
+    <!-- Aereo -->
+    <div style="margin-bottom:0.75rem;">
+      <label for="aircraft">Aereo:</label><br/>
+      <select id="aircraft" name="aircraftId" [(ngModel)]="aircraftId" required style="width:100%; padding:0.5rem;">
+        <option value="" disabled selected>Seleziona…</option>
+        <option *ngFor="let a of aircrafts" [ngValue]="a._id">
+          {{ a.pattern }} ({{ a.totalSeats }} posti)
+        </option>
+      </select>
+    </div>
+
+    <!-- Posti disponibili -->
+    <div style="margin-bottom:0.75rem;">
+      <label for="seats">Posti disponibili:</label><br/>
+      <input
+        id="seats"
+        type="number"
+        name="availableSeats"
+        [(ngModel)]="availableSeats"
+        [max]="getMaxSeats()"
+        min="1"
+        required
+        style="width:100%; padding:0.5rem;"
+      />
+      <small style="color:red;" *ngIf="availableSeats > getMaxSeats()">
+        Numero massimo consentito: {{ getMaxSeats() }} posti
+      </small>
+    </div>
+
+    <!-- Prezzi -->
+    <div style="margin-bottom:0.75rem;">
+      <label for="economy">Prezzo Economy (€):</label><br/>
+      <input id="economy" type="number" name="economyPrice" [(ngModel)]="economyPrice" min="0" required style="width:100%; padding:0.5rem;"/>
+    </div>
+
+    <div style="margin-bottom:0.75rem;">
+      <label for="business">Prezzo Business (€):</label><br/>
+      <input id="business" type="number" name="businessPrice" [(ngModel)]="businessPrice" min="0" required style="width:100%; padding:0.5rem;"/>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <label for="first">Prezzo First (€):</label><br/>
+      <input id="first" type="number" name="firstPrice" [(ngModel)]="firstPrice" min="0" required style="width:100%; padding:0.5rem;"/>
+    </div>
+
+    <button type="submit" [disabled]="flightForm.invalid || availableSeats > getMaxSeats()" style="padding:0.6rem 1.2rem; background:#1570ef; color:#fff; border:none; border-radius:4px;">
+      Crea Volo
+    </button>
+  </form>
+</div>

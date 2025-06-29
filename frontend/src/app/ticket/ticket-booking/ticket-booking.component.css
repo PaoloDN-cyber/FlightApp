@@ -1,0 +1,18 @@
+.seats-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 400px;
+}
+.seats-container button {
+  margin: 5px;
+  width: 40px;
+  height: 40px;
+}
+.seats-container button.selected {
+  background-color: green;
+  color: white;
+}
+.seats-container button:disabled {
+  background-color: red;
+  color: white;
+}

@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Statistiche Compagnia Aerea</h2>
+
+<div class="my-4">
+      <a routerLink="/airline/dashboard" class="btn btn-secondary">Torna alla Dashboard</a>
+  </div>
+
+  <div *ngIf="loading">Caricamento in corso...</div>
+
+  <div *ngIf="!loading">
+    <ul class="list-group mb-4">
+      <li class="list-group-item">Passeggeri totali: <strong>{{ totalPassengers }}</strong></li>
+      <li class="list-group-item">Guadagno totale: <strong>{{ totalRevenue | currency:'EUR' }}</strong></li>
+    </ul>
+
+    <h5>Domanda per tratta:</h5>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let entry of sortedRoutes">
+        {{ entry[0] }} → <strong>{{ entry[1] }} passeggeri</strong>
+      </li>
+    </ul>
+
+  </div>
+</div>

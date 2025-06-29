@@ -1,0 +1,91 @@
+<div class="admin-user-list">
+  
+  <h2>Lista Utenti</h2>
+
+ <div class="my-4">
+      <a routerLink="/admin/dashboard" class="btn btn-secondary">Torna alla Dashboard</a>
+  </div>
+
+
+  <!-- Spinner -->
+  <div *ngIf="loading" class="spinner">Caricamento…</div>
+
+  <!-- Filtro ruolo -->
+  <label for="roleFilter">Filtra per ruolo:</label>
+  <select id="roleFilter"
+          [(ngModel)]="selectedRole"
+          (change)="applyFilter()"
+          [disabled]="loading">
+    <option value="passenger">Passeggeri</option>
+    <option value="airline">Compagnie Aeree</option>
+    <option value="all">Tutti gli utenti</option>
+  </select>
+
+  <!-- Tabella -->
+  <table *ngIf="!loading && paginatedUsers.length">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Ruolo</th>
+        <th>Stato</th>
+        <th>Azioni</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of paginatedUsers">
+        <td>{{ user.name }}</td>
+
+        <td>
+          <!-- refuso corretto /admin/… -->
+          <a [routerLink]="['/admin/dashboard/user-detail', user.email]">
+            {{ user.email }}
+          </a>
+        </td>
+
+        <td>{{ user.role }}</td>
+
+        <!-- Stato -->
+        <td>
+          {{ user.role === 'airline' ? (user.status || '—') : '—' }}
+        </td>
+
+        <!-- Azioni -->
+        <td>
+          <ng-container *ngIf="user.role === 'airline'; else empty">
+            <button class='reminder' *ngIf="user.status === 'approved'"
+                    (click)="sendReminder(user.email)">
+              Promemoria
+            </button>
+
+            <ng-container *ngIf="user.status === 'pending'">
+              <button class='approve' (click)="approveAirline(user.email)">Approva</button>
+              <button class='reject' (click)="rejectAirline(user.email)">Rifiuta</button>
+            </ng-container>
+
+            <button class='definitive' disabled *ngIf="user.status === 'definitive'">Definitive</button>
+            <button class='rejected' disabled *ngIf="user.status === 'rejected'">Rejected</button>
+          </ng-container>
+          <ng-template #empty>&nbsp;</ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Nessun utente -->
+  <p *ngIf="!loading && !paginatedUsers.length">
+    Nessun utente da mostrare.
+  </p>
+
+  <!-- Paginazione -->
+  <div class="pagination-controls"
+       *ngIf="!loading && totalPages > 1">
+    <button (click)="changePage(-1)" [disabled]="currentPage === 1">Precedente</button>
+    Pagina {{ currentPage }} di {{ totalPages }}
+    <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Successiva</button>
+  </div>
+
+</div>  
+
+

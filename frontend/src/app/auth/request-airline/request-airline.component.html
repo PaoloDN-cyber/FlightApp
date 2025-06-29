@@ -1,0 +1,64 @@
+<form (ngSubmit)="submit()" #airlineForm="ngForm" class="max-w-md mx-auto mt-8 space-y-4">
+  <h2 class="text-xl font-semibold text-center">Richiesta registrazione compagnia</h2>
+
+  <!-- Nome compagnia -->
+  <div>
+    <label class="block mb-1 font-medium" for="name">Nome compagnia *</label>
+    <input
+      id="name"
+      name="name"
+      type="text"
+      [(ngModel)]="name"
+      required
+      #nameInput="ngModel"
+      class="w-full p-2 border rounded"
+      [ngClass]="{ 'border-red-500': nameInput.invalid && nameInput.touched }"
+    />
+    <p *ngIf="nameInput.invalid && nameInput.touched" class="text-sm text-red-600">
+      Il nome è obbligatorio.
+    </p>
+  </div>
+
+  <!-- Email -->
+  <div>
+    <label class="block mb-1 font-medium" for="email">Email *</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      [(ngModel)]="email"
+      required
+      email
+      #emailInput="ngModel"
+      class="w-full p-2 border rounded"
+      [ngClass]="{ 'border-red-500': emailInput.invalid && emailInput.touched }"
+    />
+    <p *ngIf="emailInput.errors?.['required'] && emailInput.touched" class="text-sm text-red-600">
+      L'email è obbligatoria.
+    </p>
+    <p *ngIf="emailInput.errors?.['email'] && emailInput.touched" class="text-sm text-red-600">
+      Inserisci un indirizzo email valido.
+    </p>
+  </div>
+
+  <!-- Descrizione (opzionale) -->
+  <div>
+    <label class="block mb-1 font-medium" for="description">Descrizione (opzionale)</label>
+    <textarea
+      id="description"
+      name="description"
+      [(ngModel)]="description"
+      rows="3"
+      class="w-full p-2 border border-gray-300 rounded resize-none"
+    ></textarea>
+  </div>
+
+  <!-- Pulsante invio -->
+  <button
+    type="submit"
+    [disabled]="airlineForm.invalid"
+    class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+  >
+    Invia richiesta
+  </button>
+</form>

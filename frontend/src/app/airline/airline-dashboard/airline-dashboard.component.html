@@ -1,0 +1,19 @@
+<div class="dashboard-wrapper p-4">
+  <div *ngIf="airline" class="dashboard-nav">
+    <h2>Dashboard Compagnia Aerea</h2>
+    <ul>
+      <a routerLink="create-route"    routerLinkActive="active">Crea Rotta</a>
+      <a routerLink="create-flight"   routerLinkActive="active">Crea Volo</a>  
+      <a routerLink="create-aircraft" routerLinkActive="active">Crea Aereo</a>
+      <a routerLink="stats"           routerLinkActive="active">Statistiche</a>
+    </ul>
+  </div>
+
+  <div class="dashboard-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<div *ngIf="!airline">
+  <p>Caricamento dati compagnia...</p>
+</div>

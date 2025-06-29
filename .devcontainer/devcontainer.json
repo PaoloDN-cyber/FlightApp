@@ -1,0 +1,24 @@
+ {
+  "name": "Full Stack DevContainer",
+  "service": "frontend",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "runServices": ["mongo", "backend", "frontend"],
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true,
+        "terminal.integrated.shell.linux": null
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-typescript-next"
+      ]
+    }
+  },
+  "remoteUser": "node",
+  "forwardPorts": [4200]
+} 

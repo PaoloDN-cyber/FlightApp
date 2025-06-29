@@ -1,0 +1,58 @@
+<div class="admin-user-detail">
+  <h2>Dettaglio Utente</h2>
+
+ <div class="my-4">
+      <a routerLink="/admin/dashboard" class="btn btn-secondary">Torna alla Dashboard</a>
+  </div>
+
+  <!-- Form ricerca manuale -->
+  <form (ngSubmit)="onSearch()" #searchForm="ngForm">
+    <label for="email">Email utente:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="searchEmail" required />
+    <button type="submit" [disabled]="!searchForm.valid">Cerca</button>
+  </form>
+
+  <hr />
+
+  <!-- Mostro dettagli solo se presenti -->
+  <div *ngIf="userDetail">
+    <p><strong>Nome:</strong> {{ userDetail.name }}</p>
+    <p><strong>Email:</strong> {{ userDetail.email }}</p>
+
+    <!-- Se è airline mostro descrizione e createdAt -->
+    <div *ngIf="userDetail.role==='airline'">
+      <p><strong>Descrizione:</strong> {{ userDetail.description }}</p>
+      <p><strong>Creato il:</strong> {{ userDetail.createdAt | date:'medium' }}</p>
+    </div>
+
+    <!-- Azioni per passeggero -->
+    <div *ngIf="userDetail.role==='passenger'">
+      <button class="delete" (click)="delete(userDetail.email)">Delete</button>
+    </div>
+
+    <!-- Azioni per compagnia aerea -->
+    <div *ngIf="userDetail.role==='airline'">
+      <button class="delete" (click)="delete(userDetail.email)">Delete</button>
+
+      <button class="reminder" *ngIf="userDetail.status === 'approved'" (click)="sendReminder(userDetail.email)">
+        Promemoria
+      </button>
+
+      <ng-container *ngIf="userDetail.status === 'pending'">
+        <button class="approve" (click)="approve(userDetail.email)">Approva</button>
+        <button class="reject" (click)="rejectAirline(userDetail.email)">Rifiuta</button>
+      </ng-container>
+
+      <button *ngIf="userDetail.status === 'definitive'" disabled>Definitive</button>
+      <button *ngIf="userDetail.status === 'rejected'" disabled>Rejected</button>
+    </div>
+  </div>
+
+  <!-- Se non c'è un utente ma è stato fatto accesso diretto alla pagina -->
+  <div *ngIf="!userDetail && !searchEmail">
+    <p>Nessun utente selezionato.</p>
+  </div>
+
+  <hr />
+
+</div>  

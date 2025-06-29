@@ -1,0 +1,55 @@
+/* 1. Container a due colonne */
+.dashboard-wrapper {
+  display: flex;
+  gap: 2rem;            /* spazio tra nav e contenuto */
+}
+
+/* 2. Colonna nav (bottoni) */
+.dashboard-nav {
+  flex: 0 0 50%;        /* fissa al 50% della larghezza */
+  max-width: 360px;     /* non supera i 360px */
+}
+
+/* 3. Lista bottoni senza puntini, allineata a sinistra */
+.dashboard-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* ← bottoni a sinistra */
+}
+
+/* 4. Bottoni full-width della nav */
+.dashboard-nav ul a {
+  width: 100%;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  margin: 0.5rem 0;
+  background: #1570ef;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* 5. Hover e focus */
+.dashboard-nav ul a:hover,
+.dashboard-nav ul a:focus {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* 6. Stato attivo */
+.dashboard-nav ul a.active {
+  background: #fff;
+  color: #1570ef;
+  border: 2px solid #1570ef;
+}
+
+/* 7. Colonna contenuto: prende il resto dello spazio */
+.dashboard-content {
+  flex: 1 1 auto;
+}

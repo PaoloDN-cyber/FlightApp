@@ -1,0 +1,43 @@
+<ng-container *ngIf="flight; else loading">
+  <h3>
+    {{ flight.route.from | uppercase }} →
+    {{ flight.route.to   | uppercase }}
+    ({{ flight.departureTime | date:'short' }} –
+     {{ flight.arrivalTime   | date:'short' }})
+  </h3>
+
+  <div class="extras mb-3">
+    <label>
+      <input type="checkbox" [(ngModel)]="extras.baggage"/>
+      Bagaglio (+30€)
+    </label>
+    <label class="ms-3">
+      <input type="checkbox" [(ngModel)]="extras.legroom"/>
+      Legroom (+20€)
+    </label>
+  </div>
+
+  <div class="seats-container">
+    <button *ngFor="let s of seats"
+            class="seat"
+            [class.reserved]="s.reserved"
+            [class.selected]="selectedSeat === s.id"
+            [disabled]="s.reserved"
+            (click)="toggleSeat(s)">
+      {{ s.label }}
+    </button>
+  </div>
+
+  <<p class="mt-2" *ngIf="selectedSeat !== null">
+  Selezionato: {{ (+selectedSeat + 1) }}
+  </p>
+  <button class="btn btn-primary mt-2"
+          (click)="confirm()"
+          [disabled]="!selectedSeat">
+    Conferma
+  </button>
+</ng-container>
+
+<ng-template #loading>
+  <p>Caricamento dati volo…</p>
+</ng-template>

@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <h2>Le mie prenotazioni</h2>
+  <table class="table">
+    <thead>
+      <tr><th>Volo</th><th>Rotta</th><th>Giorno</th><th>Orario di partenza</th><th>Posto</th><th>Classe</th>
+          <th>Prezzo</th><th>Extra bagaglio</th><th>Extra spazio gambe</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of bookings">
+        <td>  {{ 
+          b.flight.route.from   .substring(0,2)
+          + b.flight.route.to     .substring(0,2)
+     
+          + (b.flight.departureTime | date:'HHmm')
+          }}  
+        </td>
+        <td>{{b.flight.route.from}}→{{b.flight.route.to}}</td>
+        <td>{{ b.flight.departureTime | date:'shortDate' }}</td>
+        <td>{{ b.flight.departureTime | date:'shortTime' }}</td>
+        <td>{{ (+b.seat) + 1}}</td>
+        <td>{{b.class}}</td>
+        <td>{{b.price | currency:'EUR'}}</td>
+        <td> <span class="icon" [ngClass]="b.extras.baggage ? 'check' : 'cross'"></span> </td>
+        <td> <span class="icon" [ngClass]="b.extras.legroom ? 'check' : 'cross'"></span> </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" (click)="sendConfirmation()">
+    Invia conferma via Email
+  </button>
+</div>

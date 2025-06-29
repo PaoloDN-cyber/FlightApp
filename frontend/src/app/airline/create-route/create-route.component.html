@@ -1,0 +1,50 @@
+<h2>Crea una nuova rotta</h2>
+
+<div class="my-4">
+  <a routerLink="/airline/dashboard" class="btn btn-secondary">Torna alla Dashboard</a>
+</div>
+
+<form (ngSubmit)="onSubmit()" #routeForm="ngForm">
+
+  <!-- Partenza -->
+  <div style="margin-bottom:0.75rem;">
+    <label for="from">Da:</label><br/>
+    <select
+      id="from"
+      name="from"
+      [(ngModel)]="from"
+      required
+      style="width:100%; padding:0.5rem;"
+    >
+      <option value="" disabled selected>Seleziona…</option>
+      <option *ngFor="let a of airports" [value]="a.code">
+        {{ a.city | titlecase }} ({{ a.code.toUpperCase() }})
+      </option>
+    </select>
+  </div>
+
+  <!-- Destinazione -->
+  <div style="margin-bottom:0.75rem;">
+    <label for="to">A:</label><br/>
+    <select
+      id="to"
+      name="to"
+      [(ngModel)]="to"
+      required
+      style="width:100%; padding:0.5rem;"
+    >
+      <option value="" disabled selected>Seleziona…</option>
+      <option *ngFor="let a of airports" [value]="a.code">
+        {{ a.city | titlecase }} ({{ a.code.toUpperCase() }})
+      </option>
+    </select>
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="routeForm.invalid"
+    style="padding:0.6rem 1.2rem; background:#1570ef; color:#fff; border:none; border-radius:4px;"
+  >
+    Crea Rotta
+  </button>
+</form>

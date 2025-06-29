@@ -1,0 +1,15 @@
+/* CSS */
+.icon {
+  display: inline-block;
+  font-size: 1.2em;      /* regola a piacere */
+  width: 1em;            /* per allineamento */
+  text-align: center;
+}
+.icon.check::before {
+  content: "✔";          /* segno di spunta */
+  color: green;          /* verde */
+}
+.icon.cross::before {
+  content: "✖";          /* croce */
+  color: red;            /* rosso */
+}
